@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans  
+http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+	<bean class="ex01.SpringTest" id="test" scope="prototype"/>
+	
+	<!-- 호텔객체, 쉐프 객체 생성 -->
+	<bean class="ex02.construct.Chef" id="chef" />
+	<bean class="ex02.construct.Hotel" id="hotel" >
+		<!-- 생성자 주입 -->
+		<constructor-arg ref="chef"></constructor-arg>
+	</bean>	
+	
+	<!-- setter 주입 -->
+	<bean class="ex03.setter.DatabaseDev" id="dbDev">
+		<property name="url" value="jdbc:oracle:thin@localhost:1521/XEPDB1"/>
+		<property name="uid" value="spring"/>
+		<property name="upw" value="spring"/>
+	</bean>
+	
+	<!-- setter 주입2 -->
+	<bean class="ex03.setter.MemberDAO" id="mDAO">
+		<property name="datasource" ref="dbDev"/>
+	</bean>
+
+	<bean class="ex04.quiz.Battery1" id="b1" />
+	<bean class="ex04.quiz.Battery2" id="b2" />
+	
+	<bean class="ex04.quiz.Car" id="car">
+		<constructor-arg ref="b1"></constructor-arg>
+	</bean>
+	
+	<bean class="ex04.quiz.Airplane" id="airplane">
+		<property name="battery" ref="b2"/>
+	</bean>
+
+</beans>
