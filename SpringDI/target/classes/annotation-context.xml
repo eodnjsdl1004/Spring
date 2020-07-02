@@ -6,18 +6,21 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-<!-- 네임스페이스 -->
-
-<!-- 자바 문서에서 어노테이션방식으로 의존객체 자동 투입 -->
 <context:annotation-config/>
-	<bean id="doc1" class="ex06.autowired.Document"/>	
-	<bean id="doc2" class="ex06.autowired.Document"/>  
+
+	<bean id="keyboard" class="ex07.quiz.Keyboard"/>
+	<bean id="kb" class="ex07.quiz.Keyboard"/>
 	
-	<bean id="printer" class="ex06.autowired.Printer">
-		<!-- <constructor-arg ref = "doc1" /> -->
-		<qualifier value="doc1"/>		
-	</bean>	
-	<bean id="printer2" class="ex06.autowired.Printer2">				
-	</bean>	
+	<bean id="Monitor" class="ex07.quiz.Monitor"/>
+	<bean id="Monitor2" class="ex07.quiz.Monitor"/>
+	
+	<bean id="Mouse" class="ex07.quiz.Mouse"/>
+	<bean id="Mouse2" class="ex07.quiz.Mouse"/>
+	
+	
+	<bean id="computer" class="ex07.quiz.Computer"/>
+
+
+
 
 </beans>

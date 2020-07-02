@@ -13,7 +13,8 @@ public class MainClass {
 		Car car = ctx.getBean(Car.class);		
 		Airplane airplane = ctx.getBean(Airplane.class);
 		
-		car.getBattery().energy();		
+		car.getBattery().energy();	
+		
 		airplane.getBattery().energy();
 	}
 }

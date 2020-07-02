@@ -8,7 +8,9 @@ public class MainClass {
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("autowired-context.xml");
 		
 		Printer pt = ctx.getBean(Printer.class);
+		Printer2 pt2 = ctx.getBean(Printer2.class);
 		
-		System.out.println(pt.getDoc1().data);
+		System.out.println(pt.getDocument().data);
+		System.out.println(pt2.getDocument().data);
 	}
 }

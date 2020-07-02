@@ -29,7 +29,8 @@ http://www.springframework.org/schema/beans/spring-beans.xsd"
 	<bean class="ex04.quiz.Battery2" id="b2" />
 	
 	<bean class="ex04.quiz.Car" id="car">
-		<constructor-arg ref="b1"></constructor-arg>
+		<constructor-arg ref="b1" />
+		<constructor-arg ref="b2" />
 	</bean>
 	
 	<bean class="ex04.quiz.Airplane" id="airplane">
