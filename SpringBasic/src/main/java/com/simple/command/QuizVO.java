@@ -6,7 +6,7 @@ public class QuizVO {
 	private String month;
 	private String day;
 	
-	
+	public QuizVO() {}
 	
 	public QuizVO(String year, String month, String day) {
 		super();

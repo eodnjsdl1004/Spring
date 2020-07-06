@@ -4,5 +4,28 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- classpath:/ 는 src/main/resources 폴더 아래 파일을 팜조할 수 있습니다. -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/db-config/Hikari.properties"/>
+   	</bean>
+   
 		
+   <!-- 히카리 커넥션 DB설정 -->
+   <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig" > 
+      <property name="driverClassName" value="${ds.driverClassName}"/> 
+      <property name="jdbcUrl" value="${ds.url}"/> 
+      <property name="username" value="${ds.username}" /> 
+      <property name="password" value= "${ds.password}" /> 
+   </bean>
+	
+	
+	<!-- 위에 설정된 DB정보를 DataSource객체에 의존성 주입 -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<constructor-arg ref="hikariConfig"/>
+	</bean>
+	
+	<!-- jdbcTemplate이름으로 객체생성하며 의존주입 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
 </beans>

@@ -57,8 +57,8 @@ public class QuizController {
 	
 	@RequestMapping("/join2")
 	public String join2(@ModelAttribute("id") String id,
-						@ModelAttribute("pw") String pw,
-						@ModelAttribute("pw_check") String pw_check,
+						@RequestParam("pw") String pw,
+						@RequestParam("pw_check") String pw_check,
 						RedirectAttributes RA) {
 		
 		if(id.equals("")) {
@@ -67,8 +67,9 @@ public class QuizController {
 		}else if(!pw.equals(pw_check)) {
 			RA.addFlashAttribute("msg", "비밀번호를 확인하세요");
 			return "redirect:/quiz/quiz03";
-		} else
-			return "quiz/quiz03_ok";
+		} else {			
+			return "quiz/quiz03_ok";			
+		}
 	}
 	
 }

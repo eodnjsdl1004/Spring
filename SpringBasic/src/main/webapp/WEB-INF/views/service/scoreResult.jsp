@@ -8,8 +8,9 @@
 </head>
 <body>
 
-	<h2>로그인 실패</h2>
-	<h3>${id}는 회원이 아닙니다.</h3>
+	<h2>결과화면</h2>
 
+	<a href="scoreRegist">다시 등록하기</a>
+	<a href="scoreList">점수 리스트 확인</a>
 </body>
 </html>

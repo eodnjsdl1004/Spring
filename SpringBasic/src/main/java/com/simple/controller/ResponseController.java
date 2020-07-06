@@ -102,7 +102,7 @@ public class ResponseController {
 	
 	@RequestMapping("/res_login")
 	public String res_login(@ModelAttribute("id") String id,
-							@ModelAttribute("pw") String pw, Model model) {
+							@ModelAttribute("pw") String pw) {
 				
 		if(id.equals("kim12")&&pw.equals("1234")) {
 			return "response/res_quiz02";

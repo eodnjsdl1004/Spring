@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+	<!-- <context:annotation-config/>가 driven에 포함되어있다 -->	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<!-- 핸들러어댑터, 핸들러 매핑 -->
 	<mvc:annotation-driven />
@@ -23,8 +23,17 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+		
+	
 	<!-- 해당 패키지를 읽어서 @Controller가 붙어있는 클래스를 bean으로 생성 -->
 	<context:component-scan base-package="com.simple.controller" />
+	<!-- <beans:bean id="serviceImpl" class="com.simple.service.ScoreServiceImpl"/> -->	
+	
+	<!-- @service 컴포넌트를 읽어서 bean으로 생성 -->
+	<context:component-scan base-package="com.simple.service" />
+	
+	<!-- @Repositoty 컴포넌트를 읽어서 bean으로 생성 -->
+	<context:component-scan base-package="com.simple.dao" />
 	
 	
 	
