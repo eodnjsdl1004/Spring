@@ -7,6 +7,6 @@
 <configuration>
 	<!-- 마이바티스 설정관련 xml파일이 됩니다 -->
 	<typeAliases>
-	
+		<typeAlias type="com.team404.command.FreeBoardVO" alias="FreeBoardVO"/>
 	</typeAliases>
 </configuration>

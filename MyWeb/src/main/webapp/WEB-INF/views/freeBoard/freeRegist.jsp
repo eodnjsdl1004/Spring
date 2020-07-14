@@ -28,35 +28,60 @@
                         <p>자유게시판</p>
                     </div>
                     
-                    <table class="table">
-                        <tbody class="t-control">
-                            <tr>
-                                <td class="t-title">NAME</td>
-                                <td><input class="form-control input-sm"></td>
-                            </tr>
-                            <tr>
-                                <td class="t-title">TITLE</td>
-                                <td><input class="form-control input-sm"></td>
-                            </tr>
-                            <tr>
-                                <td class="t-title">COMMNET</td>
-                                <td>
-                                <textarea class="form-control" rows="7" ></textarea>
-                                </td>                 
-                            </tr>
-                        </tbody>
-                    </table>
+                    <form action="registForm" name="registForm" method="post">
+	                    <table class="table">
+	                        <tbody class="t-control">
+	                            <tr>
+	                                <td class="t-title">NAME</td>
+	                                <td><input class="form-control input-sm" name="writer"></td>
+	                            </tr>
+	                            <tr>
+	                                <td class="t-title">TITLE</td>
+	                                <td><input class="form-control input-sm" name="title"></td>
+	                            </tr>
+	                            <tr>
+	                                <td class="t-title">COMMNET</td>
+	                                <td>
+	                                <textarea class="form-control" rows="7" name="content"></textarea>
+	                                </td>                 
+	                            </tr>
+	                        </tbody>
+	                    </table>
+                    </form>
                     
                     <div class="titlefoot">
-                        <button class="btn">등록</button>
-                        <button class="btn">목록</button>
+                        <button class="btn" id="registBtn">등록</button>
+                        <button class="btn" id="listBtn">목록</button>
                     </div>
                 </div>
             </div>    
        </div>
     </section>
     
+    
     <%@ include file="../include/footer.jsp" %>
     
+    <script>
+		    var registBtn = document.getElementById("registBtn");
+		    
+		    registBtn.onclick = function() {
+		    	if(document.registForm.writer.value === ''){
+		    		alert("작성자를 적어주세요");
+		    		document.registForm.writer.focus();
+		    		return;
+		    	}else if(document.registForm.title.value === ''){
+		    		alert("제목을 적어주세요");
+		    		document.registForm.title.focus();
+		    		return;
+		    	}else if(document.registForm.content.value === ''){
+		    		alert("내용을 적어주세요");
+		    		document.registForm.content.focus();
+		    		return;
+		    	}else{
+		    		console.log(registBtn);
+		    		document.registForm.submit();
+		    	}
+		    }
+    </script>
 </body>
 </html>
