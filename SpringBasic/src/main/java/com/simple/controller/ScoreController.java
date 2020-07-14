@@ -3,6 +3,7 @@ package com.simple.controller;
 //import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 //import javax.annotation.Resource;
 
@@ -36,7 +37,7 @@ public class ScoreController {
 //3rd
 //@Controller,@Service, @Component, @Repositoty 자동 생성 어노테이션을 붙이고
 //해당 패키지를 스캔명령으로 읽어서 빈으로 생성후에 자동 주입 명령
-		@Autowired 		
+		@Autowired 	
 		private ScoreService scoreService;		
 		
 		@RequestMapping("/scoreRegist")
@@ -69,11 +70,14 @@ public class ScoreController {
 		public String scoreDelete(@RequestParam("num") int num,
 								  RedirectAttributes RA) {
 			
-			if(scoreService.scoreDelete(num)) {
-				return "redirect:/service/scoreList";
-			}
-			else {
-				return "redirect:/service/scoreList";
-			}
+//			if(scoreService.scoreDelete(num)) {
+//				return "redirect:/service/scoreList";
+//			}
+//			else {
+//				return "redirect:/service/scoreList";
+//			}
+			scoreService.scoreDelete(num);
+			
+			return "redirect:/service/scoreList";
 		}
 }

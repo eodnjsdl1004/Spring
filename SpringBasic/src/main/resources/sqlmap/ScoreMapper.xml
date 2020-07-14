@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이설정을 추가해야함 -->
+
+<mapper namespace="com.simple.mapper.ScoreMapper">
+	<!-- VO를 매개변수로 전달하면 VO의 속성값을 그대로 사용가능합니다. -->
+	<insert id="scoreRegist">
+		insert into score(num,name,kor,eng,math) values(score_seq.nextval,#{name},#{kor},#{eng},#{math})
+	</insert>
+	
+	<!-- select 구문은 반환 타입이 반드시 있어야 합니다. -->
+	<select id="scoreList" resultType="ScoreVO">
+		select * from score
+	</select>
+	
+	<delete id="scoreDelete">
+		delete from score where num = #{num}
+	</delete>
+</mapper>

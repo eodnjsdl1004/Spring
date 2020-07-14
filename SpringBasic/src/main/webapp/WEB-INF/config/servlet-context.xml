@@ -34,7 +34,5 @@
 	
 	<!-- @Repositoty 컴포넌트를 읽어서 bean으로 생성 -->
 	<context:component-scan base-package="com.simple.dao" />
-	
-	
-	
+
 </beans:beans>

@@ -1,6 +1,7 @@
 package com.simple.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.simple.service.BoardService;
 public class BoardServiceController {
 	
 	@Autowired
+	@Qualifier("BoardServiceImpl")
 	private BoardService boardService;
 
 	@RequestMapping("/boardRegister")
@@ -23,6 +25,13 @@ public class BoardServiceController {
 	
 	@RequestMapping("/boardForm")
 	public String boardForm(BoardVO vo) {
+		System.out.println(vo.getBno());
+		System.out.println(vo.getName());
+		System.out.println(vo.getTitle());
+		System.out.println(vo.getContent());
+		
+		
+		
 		boardService.boardRegist(vo);
 		return "/service/boardResult";
 	}

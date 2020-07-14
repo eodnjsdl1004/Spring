@@ -49,7 +49,6 @@
 		            'Content-Type': 'application/x-www-form-urlencoded' //폼형식
 		        },
 		   body:"num="+num
-		    
 		}).then(function(response){
 			console.log(response);
 			console.log(num);
