@@ -32,24 +32,24 @@
                         <form action="freeModify" method="post">
                             <div>
                                 <label>DATE</label>
-                                <p>2019-12-12</p>
+                                <p><fmt:formatDate value="${boardVO.regdate}" pattern="yyyy-MM-dd"/></p>
                             </div>   
                             <div class="form-group">
                                 <label>번호</label>
-                                <input class="form-control" name="bno" value="${vo.bno}" readonly>
+                                <input class="form-control" name="bno" value="${boardVO.bno}" readonly>
                             </div>
                             <div class="form-group">
                                 <label>작성자</label>
-                                <input class="form-control" name="writer" value="${vo.writer}" readonly>
+                                <input class="form-control" name="writer" value="${boardVO.writer}" readonly>
                             </div>    
                             <div class="form-group">
                                 <label>제목</label>
-                                <input class="form-control" name="title" value="${vo.title}" readonly>
+                                <input class="form-control" name="title" value="${boardVO.title}" readonly>
                             </div>
 
                             <div class="form-group">
                                 <label>내용</label>
-                                <textarea class="form-control" rows="10" name="content" readonly>${vo.content}</textarea>
+                                <textarea class="form-control" rows="10" name="content" readonly>${boardVO.content}</textarea>
                             </div>
 
                             <button type="submit" class="btn btn-primary">변경</button>

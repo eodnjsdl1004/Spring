@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,32 +28,32 @@
                             <p>수정하기</p>
                         </div>
                         
-                        <form action="updateForm" name="updateForm" method="post">
+                        <form action="" name="modifyForm" method="post">
                             <div>
                                 <label>DATE</label>
-                                <p>2019-12-12</p>
+                                <p><fmt:formatDate value="${boardVO.regdate}" pattern="yyyy-MM-dd"/></p>
                             </div>   
                             <div class="form-group">
                                 <label>번호</label>
-                                <input class="form-control" name="bno" value="${vo.bno}" readonly>
+                                <input class="form-control" name="bno" value="${boardVO.bno}" readonly>
                             </div>
                             <div class="form-group">
                                 <label>작성자</label>
-                                <input class="form-control" name="writer" value="${vo.writer}">
+                                <input class="form-control" name="writer" value="${boardVO.writer}">
                             </div>    
                             <div class="form-group">
                                 <label>제목</label>
-                                <input class="form-control" name="title" value="${vo.title}">
+                                <input class="form-control" name="title" value="${boardVO.title}">
                             </div>
 
                             <div class="form-group">
                                 <label>내용</label>
-                                <textarea class="form-control" rows="10" name="content">${vo.content}</textarea>
+                                <textarea class="form-control" rows="10" name="content">${boardVO.content}</textarea>
                             </div>
 
-                            <button type="button" class="btn btn-dark">목록</button>    
-                            <button type="button" class="btn btn-primary" id="UpdateBtn">변경</button>
-                            <button type="button" class="btn btn-info" id="DeleteBtn">삭제</button>
+                            <button type="button" class="btn btn-dark" id="listBtn">목록</button>    
+                            <button type="button" class="btn btn-primary" id="updateBtn">변경</button>
+                            <button type="button" class="btn btn-info" id="deleteBtn">삭제</button>
                     </form>
                                     
                 </div>
@@ -71,32 +72,41 @@
 		 5. 실패시 실패처리 글 띄우고 전부 redirect로 list화면으로 넘기기
 		 */
 		 
+        var listBtn = document.getElementById("listBtn");    	
+        var updateBtn = document.getElementById("updateBtn");
+        var deleteBtn = document.getElementById("deleteBtn");
+       	
         
-        var UpdateBtn = document.getElementById("UpdateBtn");
-        var DeleteBtn = document.getElementById("DeleteBtn");
-        UpdateBtn.onclick = function(){
-    		 if(document.updateForm.bno.value ===''){
-				 alert("글번호가 공백입니다.");
-				 return;
-			 }else if(document.updateForm.writer.value === ''){
+        listBtn.onclick = function(){
+        	location.href="freeList"; //목록 화면 이동
+        }
+        
+        updateBtn.onclick = function(){
+        	
+        	
+    		 if(document.modifyForm.writer.value === ''){
 				 alert("작성자가 공백입니다.");
+				 document.modifyForm.writer.focus();
 				 return;
-			 }else if(document.updateForm.title.value === ''){
+			 }else if(document.modifyForm.title.value === ''){
 				 alert("제목이 공백입니다.");
+				 document.modifyForm.title.focus();
 				 return;
-			 }else if(document.updateForm.content.value === ''){
+			 }else if(document.modifyForm.content.value === ''){
 				 alert("내용이 공백입니다.");
+				 document.modifyForm.content.focus();
 				 return;
 			 }else {
-				 document.updateForm.submit();
+				 document.modifyForm.action="updateForm";
+				 document.modifyForm.submit();
 			 }
         }
         
-        DeleteBtn.onclick=function(){
-        	var bno = document.getElementsByName("bno")[0].value;        	
-        	location.href="freeDelete?bno="+bno;
-        }
-        
+        deleteBtn.onclick=function(){
+        	//var bno = document.getElementsByName("bno")[0].value;        	
+        	document.modifyForm.action="freeDelete"; 
+        	document.modifyForm.submit();
+        }        
         </script>
 </body>
 </html>

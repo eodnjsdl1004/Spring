@@ -1,5 +1,8 @@
 package com.team404.service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.team404.command.FreeBoardVO;
 import com.team404.mapper.FreeBoardMapper;
+import com.team404.utill.Criteria;
 
 @Service("freeBoardService")
 public class FreeBoardServiceImpl implements FreeBoardService{
@@ -20,9 +24,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public List<FreeBoardVO> getList() {
+	public List<FreeBoardVO> getList(Criteria cri) {
 		
-		return freeBoardMapper.getList();
+		return freeBoardMapper.getList(cri);
 	}
 
 	@Override
@@ -34,6 +38,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public int getUpdate(FreeBoardVO vo) {
 		
+//		Date date = new Date();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");		
+//		vo.setUpdatedate(Timestamp.valueOf(sdf.format(date)));
 		return freeBoardMapper.getUpdate(vo);
 	}
 
@@ -43,4 +50,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		return freeBoardMapper.getDelete(bno);
 	}
 
+	@Override
+	public int getTotal() {
+		
+		return freeBoardMapper.getTotal();
+	}
 }

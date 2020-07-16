@@ -32,19 +32,30 @@
                     </div>
                     <hr>
                     
+                    <select onchange="change(this)">
+						<option value="10" ${pageVO.amount==10? 'selected':''}>10개 보기</option>
+						<option value="15" ${pageVO.amount==15? 'selected':''}>15개 보기</option>
+						<option value="20" ${pageVO.amount==20? 'selected':''}>20개 보기</option>
+						<option value="50" ${pageVO.amount==50? 'selected':''}>50개 보기</option>
+						<option value="100" ${pageVO.amount==100? 'selected':''}>100개 보기</option>					
+					</select>
+                  
+ 	         		<span>총 ${pageVO.total}</span>
+                    
                     <!--form select를 가져온다 -->
-                    <form>
-		    <div class="search-wrap">
-                       <button type="button" class="btn btn-info search-btn">검색</button>
-                       <input type="text" class="form-control search-input">
-                       <select class="form-control search-select">
-                            <option>제목</option>
-                            <option>내용</option>
-                            <option>작성자</option>
-                            <option>제목+내용</option>
-                       </select>
-                    </div>
-		    </form>
+                    <form>                    
+			    		<div class="search-wrap">			    		   
+			    			
+	                       <button type="button" class="btn btn-info search-btn">검색</button>
+	                       <input type="text" class="form-control search-input">
+	                       <select class="form-control search-select">
+	                            <option>제목</option>
+	                            <option>내용</option>
+	                            <option>작성자</option>
+	                            <option>제목+내용</option>
+	                       </select>
+	                    </div>
+		   			 </form>
                    
                     <table class="table table-bordered">
                         <thead>
@@ -76,13 +87,18 @@
                     <div class="text-center">
                     <hr>
                     <ul class="pagination pagination-sm">
-                        <li><a href="#">이전</a></li>
-                        <li  class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">다음</a></li>
+                        		<!-- 2. 이전버튼 활성화 여부 -->
+								<c:if test="${pageVO.prev }">
+									<li><a href="freeList?pageNum=${pageVO.startPage -1 }&amount=${pageVO.amount}">이전</a></li>
+								</c:if>	
+                        		<!-- 1. 페이지 번호처리 -->
+								<c:forEach var="num" begin="${pageVO.startPage }" end="${pageVO.endPage }">
+									<li class="${num == pageVO.pageNum ? 'active' : '' }"><a href="freeList?pageNum=${num }&amount=${pageVO.amount}">${num }</a></li>
+								</c:forEach>
+                        		<!-- 3. 다음버튼 활성화 여부 -->
+								<c:if test="${pageVO.next }">
+									<li><a href="freeList?pageNum=${pageVO.endPage + 1 }&amount=${pageVO.amount}">다음</a></li>
+								</c:if>
                     </ul>
                     <button type="button" class="btn btn-info" onclick="location.href='freeRegist'">글쓰기</button>
                     </div>
@@ -114,6 +130,11 @@
 			}
 			
 		})()
+		
+		function change(a){			
+			console.log(a.value);
+			location.href='freeList?pageNum=1&amount='+a.value; 
+		}
 	</script>
 </body>
 </html>
