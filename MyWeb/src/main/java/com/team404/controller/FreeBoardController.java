@@ -34,9 +34,12 @@ public class FreeBoardController {
 		List<FreeBoardVO> list = freeBoardService.getList(cri);
 		model.addAttribute("boardList", list);
 		
-		int total = freeBoardService.getTotal();		
+		int total = freeBoardService.getTotal(cri);		
 		PageVO pageVO = new PageVO(cri,total);
-		model.addAttribute("pageVO", pageVO);
+		model.addAttribute("pageVO", pageVO);		
+		model.addAttribute("cri", cri);
+		
+//		System.out.println(cri.toString());
 		
 		return "freeBoard/freeList";
 	}

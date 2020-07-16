@@ -11,5 +11,5 @@ public interface FreeBoardMapper {
 	public FreeBoardVO getContent(int bno);
 	public int getUpdate(FreeBoardVO vo);
 	public int getDelete(int bno);
-	public int getTotal();
+	public int getTotal(Criteria cri);
 }

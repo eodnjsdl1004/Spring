@@ -32,7 +32,7 @@
                     </div>
                     <hr>
                     
-                    <select onchange="change(this)">
+                    <select class="amount" onchange="change(this)">
 						<option value="10" ${pageVO.amount==10? 'selected':''}>10개 보기</option>
 						<option value="15" ${pageVO.amount==15? 'selected':''}>15개 보기</option>
 						<option value="20" ${pageVO.amount==20? 'selected':''}>20개 보기</option>
@@ -43,18 +43,21 @@
  	         		<span>총 ${pageVO.total}</span>
                     
                     <!--form select를 가져온다 -->
-                    <form>                    
+                    <form action="freeList" name="searchForm" method="post">                    
 			    		<div class="search-wrap">			    		   
 			    			
-	                       <button type="button" class="btn btn-info search-btn">검색</button>
-	                       <input type="text" class="form-control search-input">
-	                       <select class="form-control search-select">
-	                            <option>제목</option>
-	                            <option>내용</option>
-	                            <option>작성자</option>
-	                            <option>제목+내용</option>
+	                       <button type="submit" class="btn btn-info search-btn">검색</button>
+	                       <input type="text" class="form-control search-input" name="searchName" value="${cri.searchName}">
+	                       <select class="form-control search-select" name="searchType">
+	                            <option value="title" ${cri.searchType eq 'title' ? 'selected':''}>제목</option>
+	                            <option value="content" ${cri.searchType eq 'content' ? 'selected':''}>내용</option>
+	                            <option value="writer" ${cri.searchType eq 'writer' ? 'selected':''}>작성자</option>
+	                            <option value="titcont" ${cri.searchType eq 'titcont' ? 'selected':''}>제목+내용</option>
 	                       </select>
 	                    </div>
+	                    
+	                    <input type="hidden" name="pageNum" value="1">
+	                    <input type="hidden" name="amount" value="${cri.amount}">	                    
 		   			 </form>
                    
                     <table class="table table-bordered">
@@ -83,23 +86,30 @@
 
 
                     <!--페이지 네이션을 가져옴-->
-		    <form>
+		    <form action="freeList" name="pageForm" method="post">
                     <div class="text-center">
                     <hr>
-                    <ul class="pagination pagination-sm">
+                    <ul class="pagination pagination-sm" id="page">
                         		<!-- 2. 이전버튼 활성화 여부 -->
 								<c:if test="${pageVO.prev }">
-									<li><a href="freeList?pageNum=${pageVO.startPage -1 }&amount=${pageVO.amount}">이전</a></li>
+									<li><a href="${pageVO.startPage-1}" data-pagenum="${pageVO.startPage-1}">이전</a></li>
 								</c:if>	
                         		<!-- 1. 페이지 번호처리 -->
 								<c:forEach var="num" begin="${pageVO.startPage }" end="${pageVO.endPage }">
-									<li class="${num == pageVO.pageNum ? 'active' : '' }"><a href="freeList?pageNum=${num }&amount=${pageVO.amount}">${num }</a></li>
+									<li class="${num == pageVO.pageNum ? 'active' : '' }"><a href="${num}" data-pagenum="${num}">${num }</a></li>
 								</c:forEach>
                         		<!-- 3. 다음버튼 활성화 여부 -->
 								<c:if test="${pageVO.next }">
-									<li><a href="freeList?pageNum=${pageVO.endPage + 1 }&amount=${pageVO.amount}">다음</a></li>
+									<li><a href="${pageVO.endPage+1}" data-pagenum="${pageVO.endPage+1}">다음</a></li>
 								</c:if>
                     </ul>
+                    
+                    <!-- 페이징 클릭시 숨겨서 보낼 값 -->
+                    <input type="hidden" name="pageNum" value="${cri.pageNum}">
+                    <input type="hidden" name="amount" value="${cri.amount}">
+                    <input type="hidden" name="searchType" value="${cri.searchType}">
+                    <input type="hidden" name="searchName" value="${cri.searchName}">
+                    
                     <button type="button" class="btn btn-info" onclick="location.href='freeRegist'">글쓰기</button>
                     </div>
 		    </form>
@@ -131,10 +141,33 @@
 			
 		})()
 		
-		function change(a){			
-			console.log(a.value);
-			location.href='freeList?pageNum=1&amount='+a.value; 
+		/*
+		1. 아래 페이지 버튼을 a태그에서 폼전송으로 변경
+		2. Criteria에 검색 키워드를 추가
+		3. 검색폼과, 페이지폼이 동일한 값을 가지고 넘어가도록 hidden값을 추가
+		4. sql문을 동적쿼리로 변경, total sql도 동적 쿼리로 변경
+		5. pageVO에 검색 키워드를 저장도록 처리
+		6. 화면에서 select 박스 키워드 처리, input 태그 키워드 처리
+		7. 페이지를 이동하거나 검색, 버튼을 클릭했을때 검색 조건이 유지되도록 처리함
+		*/
+		
+		var amount = document.querySelector(".amount").value;
+		function change(){			
+			amount = event.target.value;
+			 var searchType = document.searchForm.searchType.value;
+			 var searchName = document.searchForm.searchName.value;
+			 
+			location.href='freeList?pageNum=1&amount='+amount+'&searchType='+searchType+'&searchName='+searchName; 
 		}
+		
+		var page = document.getElementById("page");
+		page.onclick = function(){
+			 event.preventDefault();						 
+			 
+			 var pageNum = event.target.dataset.pagenum;			 
+			 document.pageForm.pageNum.value = pageNum;			 
+			 document.pageForm.submit();
+		}		
 	</script>
 </body>
 </html>

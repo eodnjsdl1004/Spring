@@ -21,6 +21,7 @@ public class PageVO {
 		this.pageNum = cri.getPageNum();
 		this.amount = cri.getAmount();
 		this.total = total;
+//		this.cri = cri;
 		
 		//끝페이지 계산
 		//PageNum이 11을 가리킬때 => 20번이 되야한다.
